@@ -1,17 +1,32 @@
 <!-- Header: Fixed, Classic White Bar -->
+<?php
+require_once(__DIR__ . '/../includes/db_config.php');
+$dbStatus = checkDatabaseStatus();
+?>
 <header class="bg-primary-white sticky top-0 shadow-classic p-4 flex justify-center items-center z-20 border-b border-border-light">
-    <div class="flex items-center space-x-3 w-full max-w-6xl">
-        <!-- Logo: Deep Navy Blue 'H' -->
-        <div class="bg-primary-dark text-white p-2 rounded-lg font-black text-xl shadow-md">H</div>
-        <!-- Name: HAZLE SCHOLARSHIPS in bold Navy -->
-        <span class="text-2xl font-extrabold tracking-tight text-primary-dark uppercase">HAZLE SCHOLARSHIPS</span>
+    <div class="flex items-center justify-between w-full max-w-6xl">
+        <!-- Left Side: Logo and Title -->
+        <div class="flex items-center space-x-3">
+            <div class="bg-primary-dark text-white p-2 rounded-lg font-black text-xl shadow-md">H</div>
+            <span class="text-2xl font-extrabold tracking-tight text-primary-dark uppercase">HAZLE SCHOLARSHIPS</span>
+        </div>
         
-        <!-- Hamburger Menu Button -->
-        <button id="hamburger-btn" class="ml-auto p-2 hover:bg-gray-100 rounded-lg transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-        </button>
+        <!-- Right Side: Status and Menu -->
+        <div class="flex items-center space-x-4">
+            <!-- Database Status Indicator -->
+            <div class="px-3 py-1 rounded-full bg-opacity-10 <?php echo $dbStatus['status'] ? 'bg-green-100' : 'bg-red-100'; ?> flex items-center">
+                <div class="w-2 h-2 rounded-full <?php echo $dbStatus['status'] ? 'bg-green-500 animate-pulse' : 'bg-red-500'; ?> mr-2"></div>
+                <span class="text-sm font-medium <?php echo $dbStatus['status'] ? 'text-green-700' : 'text-red-700'; ?>">
+                    <?php echo $dbStatus['message']; ?>
+                </span>
+            </div>
+            
+            <!-- Hamburger Menu Button -->
+            <button id="hamburger-btn" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden fixed right-4 top-16 bg-white rounded-lg shadow-deep border border-border-light w-48">
